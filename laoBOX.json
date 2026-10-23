@@ -3518,67 +3518,67 @@
    "key": "官源 | 腾讯",
    "name": "官源 | 腾讯",
    "type": 3,
-   "api": "./lib/腾讯.js",
+   "api": "./lib/drpy2.min.js",
    "searchable": 1,
    "quickSearch": 1,
    "filterable": 1,
    "changeable": 1,
-   "ext": {}
+   "ext": "./lib/官源_腾讯.js"
   },
   {
    "key": "官源 | 360影视",
    "name": "官源 | 360影视",
    "type": 3,
-   "api": "./lib/360影视.js",
+   "api": "./lib/drpy2.min.js",
    "searchable": 1,
    "quickSearch": 1,
    "filterable": 1,
    "changeable": 1,
-   "ext": {}
+   "ext": "./lib/官源_360影视.js"
   },
   {
    "key": "官源 | 芒果",
    "name": "官源 | 芒果",
    "type": 3,
-   "api": "./lib/芒果.js",
+   "api": "./lib/drpy2.min.js",
    "searchable": 1,
    "quickSearch": 1,
    "filterable": 1,
    "changeable": 1,
-   "ext": {}
+   "ext": "./lib/官源_芒果.js"
   },
   {
    "key": "官源 | 爱奇艺",
    "name": "官源 | 爱奇艺",
    "type": 3,
-   "api": "./lib/爱奇艺.js",
+   "api": "./lib/drpy2.min.js",
    "searchable": 1,
    "quickSearch": 1,
    "filterable": 1,
    "changeable": 1,
-   "ext": {}
+   "ext": "./lib/官源_爱奇艺.js"
   },
   {
    "key": "官源 | 搜狗",
    "name": "官源 | 搜狗",
    "type": 3,
-   "api": "./lib/搜狗.js",
+   "api": "./lib/drpy2.min.js",
    "searchable": 1,
    "quickSearch": 1,
    "filterable": 1,
    "changeable": 1,
-   "ext": {}
+   "ext": "./lib/官源_搜狗.js"
   },
   {
    "key": "官源 | 优酷",
    "name": "官源 | 优酷",
    "type": 3,
-   "api": "./lib/优酷.js",
+   "api": "./lib/drpy2.min.js",
    "searchable": 1,
    "quickSearch": 1,
    "filterable": 1,
    "changeable": 1,
-   "ext": {}
+   "ext": "./lib/官源_优酷.js"
   }
  ],
  "parses": [

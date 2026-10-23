@@ -1,4 +1,4 @@
-laoBOX 本地包（OK影视 2.5 / FongMi 系 / 安卓 4.4）
+laoBOX 本地包（OK影视 2.5 / FongMi 系 / 安卓 4.4 / NewBox）
 ========================================
 = 组成 =（以龙门本地包为基础 + JSMTVBOX 修复版可用源增量）
  1) 龙门 jar 源 36 个（龙门影视/天天秒播/星芽短剧/豆瓣/哔哩哔哩/斗鱼直播等）
@@ -6,43 +6,43 @@ laoBOX 本地包（OK影视 2.5 / FongMi 系 / 安卓 4.4）
  3) JSMTVBOX 增量：csp_ jar 源 103 个（APP影视/4K/短剧/影视/动漫/磁力/
     网盘/聚合搜索/体育/听书/儿童/教育/哔哩系列，走 spider.jar）
  4) 官源 6 个（腾讯/360/芒果/爱奇艺/搜狗/优酷）
-    —— FongMi 格式单文件（框架+修复规则+__JS_SPIDER__ 导出），
-       【v2 已做 ES5 兼容修复】：
-       框架与规则分开 Babel 转译（ES5）+ $js.toString 增强（兼容普通函数）
-       + es5_polyfill（Object.assign/Array.from/startsWith 等）
-       —— 老 Rhino（OK影视 2.5 / 安卓 4.4）可解析执行
+    —— 【v3】学习 jsm.json 的 lib/ext 分离模式：
+       api = lib/drpy2.min.js（drpy2 引擎 111KB）
+       ext = lib/官源_*.js（修复版规则，腾讯/360 推荐段用 MVL 新接口）
+       依赖 lib/drpy-core-lite.min.js（708KB 核心库，与引擎同目录）
+       —— 适用支持 ES Module JS 源的播放器（NewBox 2.0.7 等，与 jsm.json 同构）
+    —— 【v2 备用】单文件 ES5 版（lib/腾讯.js 等，框架+规则合并转译）
+       供老 Rhino 播放器（OK影视 2.5 / 安卓 4.4）：把官源 site 的 api 改为
+       ./lib/腾讯.js 并把 ext 改为 {}（或直接用 v2 配置地址）
  5) 直播 4 组（龙门 + migu/live/ipv6） + 解析接口 39 个
 
-= 剔除的源（OK影视 2.5 不支持，按"用不了就不要"原则） =
- - py 源 9 个（FongMi 无 python 环境）
- - ES 模块 drpy JS 源（音乐/听书/动漫等小众源，FongMi 不认 import/export）
-
-= 官源 v2 验证状态（Node 仿真） =
- - 官源 | 腾讯：首页 7 分类 + 推荐 24 条 ✓、搜索 ✓（完整可用）
- - 官源 | 360影视：首页 4 分类 + 推荐 9 条 ✓、搜索 ✓（完整可用）
+= 官源 v3 状态 =
+ - 官源 | 腾讯：分类/搜索/首页推荐（MVL 新接口，Node 仿真 24 条）✓
+ - 官源 | 360影视：分类/推荐 9 条/搜索 ✓
  - 官源 | 爱奇艺 / 优酷 / 搜狗 / 芒果：搜索可用；
-   首页推荐接口已被源站关闭（返回空，与播放器/ES5 无关）
+   首页推荐接口已被源站关闭（返回空，与播放器无关）
 
-= 用法（OK影视 2.5） =
+= 用法 =
  1. 把 laoBOX 文件夹整体复制到盒子任意目录（保持结构）：
       laoBOX/
       ├─ laoBOX.json
       ├─ jar/    （lm60601/dx0301/dx260509/spider 共4个jar）
-      ├─ lib/    （6 个官源单文件，ES5 兼容版）
+      ├─ lib/    （drpy2.min.js + drpy-core-lite.min.js + 官源_*.js 规则
+                  + 腾讯.js 等 v2 ES5 单文件备用）
       ├─ json/   （7 个爬虫配置）
       └─ tvboxtv.txt / live.txt（直播）
- 2. OK影视 → 设置 → 配置地址/本地配置 → 选择 laoBOX.json
+ 2. 播放器 → 设置 → 配置地址/本地配置 → 选择 laoBOX.json
  3. 首页源可选手动选「官源 | 腾讯」
- 4. 安卓 4.4：jar 均为 dex 035 兼容，OK影视 2.5 支持 4.4
 
-= 在线配置地址（GitHub 部署，v2 已更新 ES5 官源） =
- - 直连代理（推荐，无缓存）：
+= 在线配置地址（GitHub 部署） =
+ - v3（当前，官源分离模式）：
    https://v4.gh-proxy.org/https://raw.githubusercontent.com/jakebing-ux/laobox/main/laoBOX.json
- - CDN（tag v2，秒级生效）：
+   https://cdn.jsdelivr.net/gh/jakebing-ux/laobox@v3/laoBOX.json
+ - v2（官源 ES5 单文件，OK影视 2.5 老 Rhino）：
    https://cdn.jsdelivr.net/gh/jakebing-ux/laobox@v2/laoBOX.json
  - jar 走 v4.gh-proxy.org 代理（jsDelivr 对 jar 403），lib/json/live 走 jsDelivr
 
 = 备注 =
  - JSMTVBOX 的 csp_ 源已统一加 jar 字段指向 ./jar/spider.jar（类来源明确）
  - 采集源/解析接口为远程在线服务，失效后改 laoBOX.json 对应 url 即可
- - 官源规则想自换：替换 lib/ 同名 js（保持框架+规则+导出三段结构）
+ - 官源规则想自换：替换 lib/官源_同名.js（规则段结构：var rule = {...}）
